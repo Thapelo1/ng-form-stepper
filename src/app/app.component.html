@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <ng-container *ngIf="activeStep === 1">
+    <!-- Content when activeStep is 1 -->
+    <h3>Allocate</h3>
+    <button type="button" class="btn btn-primary" (click)="verifiedAllocations()">Continue</button>
+
+    <table class="table table-hover table-bordered mt-5">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Allocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <div class="form-group">
+              <input type="number" class="form-control" id="allocate"  placeholder="" [(ngModel)]="user.allocatedAmount">
+            </div>
+          </td>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="activeStep === 2">
+    <!-- Content when activeStep is 2 -->
+    <h3>Verify</h3>
+    <button type="button" class="btn btn-danger m-1" (click)="nextStep(1)">Back</button>
+    <button type="button" class="btn btn-primary" (click)="nextStep(3)">Submit</button>
+    <table class="table table-hover table-bordered mt-5">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Allocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.allocatedAmount}}</td>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="activeStep === 3">
+    <!-- Content when activeStep is 3 -->
+    <h3>Complete</h3>
+    <button type="button" class="btn btn-primary" (click)="nextStep(1)">Make another allocation</button>
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="btn-close"></button>
+      <h4 class="alert-heading">Success!</h4>
+      <p class="mb-0">Instruction has been submitted</p>
+    </div>
+    <table class="table table-hover table-bordered mt-5">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Allocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.allocatedAmount}}</td>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
